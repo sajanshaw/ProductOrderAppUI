@@ -1,0 +1,11 @@
+<h2>Order List</h2>
+<ul>
+  <li *ngFor="let order of orders">
+    <strong>Order ID:</strong> {{ order.id }}<br>
+    <strong>Customer Name:</strong> {{ order.customerName }}<br>
+    <strong>Product IDs:</strong>
+    <span *ngFor="let pid of order.productIds; let last = last">
+      {{ pid }}<span *ngIf="!last">, </span>
+    </span><br>
+    <strong>Order Date:</strong> {{ order.orderDate | date:'medium' }}
+  </li>
