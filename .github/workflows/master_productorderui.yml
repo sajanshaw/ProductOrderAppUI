@@ -23,10 +23,10 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: Install Chrome dependencies
+            - name: Install Chrome dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2
+          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2t64
 
       - name: Set CHROME_BIN for headless tests
         run: echo "CHROME_BIN=$(which google-chrome || which chromium-browser || which chromium)" >> $GITHUB_ENV
