@@ -30,13 +30,16 @@ jobs:
         run: npm run build -- --configuration=production
 
       - name: Zip artifact for deployment
-        run: zip -r release.zip ./dist/*
+        run: |
+          cd dist/product-order-app/browser
+          zip -r ../../../release.zip ./*
+          cd ../../../
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: angular-app
-          path: release.zip
+          path: dist/release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,7 +55,7 @@ jobs:
           name: angular-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip dist/release.zip
 
       - name: Login to Azure
         uses: azure/login@v2
