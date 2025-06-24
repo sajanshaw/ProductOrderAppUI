@@ -24,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build Angular app
         run: npm run build -- --configuration=production
@@ -32,14 +32,14 @@ jobs:
       - name: Zip artifact for deployment
         run: |
           cd dist/product-order-app/browser
-          zip -r ../../../release.zip ./*
-          cd ../../../
+          zip -r ../../../../release.zip ./*
+          cd ../../../../
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: product-order-app
-          path: dist/release.zip
+          name: angular-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,10 +52,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: product-order-app
+          name: angular-app
 
       - name: Unzip artifact for deployment
-        run: unzip dist/release.zip
+        run: unzip release.zip
 
       - name: Login to Azure
         uses: azure/login@v2
@@ -68,6 +68,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'product-order-app'
+          app-name: 'ProductOrderUI'
           slot-name: 'Production'
           package: .
