@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: ProductOrderUI
+          name: product-order-app
           path: dist/release.zip
 
   deploy:
@@ -52,7 +52,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: ProductOrderUI
+          name: product-order-app
 
       - name: Unzip artifact for deployment
         run: unzip dist/release.zip
