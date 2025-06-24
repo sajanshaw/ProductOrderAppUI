@@ -23,9 +23,19 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install
+      - name: Install Chrome dependencies
         run: |
-          npm install
+          sudo apt-get update
+          sudo apt-get install -y libnss3 libatk-bridge2.0-0 libgtk-3-0 libxss1 libasound2t64
+
+      - name: Set CHROME_BIN for headless tests
+        run: echo "CHROME_BIN=$(which google-chrome || which chromium-browser || which chromium)" >> $GITHUB_ENV
+
+      - name: npm install
+        run: npm install
+
+      - name: Run tests
+        run: npm test
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
@@ -66,4 +76,3 @@ jobs:
           app-name: 'ProductOrderUI'
           slot-name: 'Production'
           package: .
-          
