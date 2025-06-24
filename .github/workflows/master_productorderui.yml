@@ -68,6 +68,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'ProductOrderUI'
+          app-name: 'product-order-app'
           slot-name: 'Production'
           package: .
