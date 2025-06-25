@@ -34,9 +34,8 @@ jobs:
       - name: Build Angular app
         run: npm run build -- --configuration production
 
-      # Adjust 'ProductOrderUI' if your Angular project name is different
       - name: Zip artifact for deployment
-        run: cd dist/ProductOrderUI && zip -r ../../release.zip .
+        run: cd dist/product-order-app && zip -r ../../release.zip .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
